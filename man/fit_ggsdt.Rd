@@ -1,0 +1,28 @@
+\name{fit_ggsdt}
+\alias{fit_ggsdt}
+\title{Fitting GGSDT model}
+\usage{
+fit_ggsdt(nR_S1, nR_S2, add_constant = T)
+}
+\arguments{
+  \item{nR_S1}{response frequency for S1 stimuli ordered from highest confidence S2 to highest confidence S1, such as (3, 4, 8, 11, 15, 24)}
+  \item{nR_S2}{response frequency for S2 stimuli ordered from highest confidence S2 to highest confidence S1, such as (20, 15, 10, 7, 5, 3)}
+  \item{add_constant}{if true, adds small value to response frequency to avoid zero-cell-related issues}
+}
+\description{
+Estimates GGSDT parameters
+}
+\examples{
+fit_ggsdt(nR_S1, nR_S2, add_constant = F)
+}
+\value{
+  data.frame with following columns
+  \item{mu2}{estimated mean value for S2 distribution}
+  \item{alpha2}{estimated alpha value for S2 distribution}
+  \item{beta}{estimated beta value for S1 and S2 distributions}
+  \item{LogLike}{log likelihood}
+  \item{sigma1}{SD for S1 distribution calculated with estimated beta value (alpha1 is fixed at 1)}
+  \item{sigma2}{SD for S2 distribution calculated with estimated alpha2 and beta values}
+  \item{kurtosis}{kurtosis for S1 and S2 distributions caluculated with estimated beta value}
+  \item{Xi}{ith decision criterion (from lowest to highest)}
+}
