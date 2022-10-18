@@ -1,5 +1,5 @@
-\name{ggdstr}
-\alias{ggdstr}
+\name{ggdistr}
+\alias{ggdistr}
 \title{Plotting GGSDT distributions}
 \usage{
 ggdistr(mu2 = 1.5, alpha2 = 1.2, beta = 1.8)
