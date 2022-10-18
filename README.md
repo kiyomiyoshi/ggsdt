@@ -31,8 +31,8 @@ e.g. `help(fit_ggsdt)`
 
 ## Example
 
-The `fit_ggsdt` function requires arguments as specified in Maniscalco &
-Law’s webpage: <http://www.columbia.edu/~bsm2105/type2sdt/>  
+The `fit_ggsdt()` function requires arguments as specified in Maniscalco
+& Law’s webpage: <http://www.columbia.edu/~bsm2105/type2sdt/>  
 The same arguments are also employed in `metaSDT` package:
 <https://github.com/craddm/metaSDT>
 
