@@ -91,8 +91,8 @@ ggdistr <- function(mu2, alpha2, beta) {
                               args = list(mu = mu2, alpha = alpha2, beta = beta)) +
         ggplot2::annotate("text", x =  2.6, y = 0.3, parse = F, label = "S2", size = 5) +
         ggplot2::annotate("text", x = -1.5, y = 0.3, parse = F, label = "S1", size = 5) +
-        ggplot2::scale_x_continuous(breaks = seq(0, round(mu2, digits = 3), round(mu2, digits = 3)),
-                           labels = c(0, mu2), limits = c(-5, 5), expand = c(0, 0)) +
+        ggplot2::scale_x_continuous(breaks = seq(0, mu2, mu2),
+                           labels = c(0, round(mu2, digits = 3)), limits = c(-5, 5), expand = c(0, 0)) +
         ggplot2::scale_y_continuous(breaks = NULL,
                            limits = c(0, 0.75), expand = c(0, 0)) +
         ggplot2::xlab("") + ggeasy::easy_remove_y_axis()
