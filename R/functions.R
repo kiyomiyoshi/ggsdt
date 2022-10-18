@@ -26,7 +26,7 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
                                   control = list("maxit" = 100000,
                                                  "parscale" = c(1, 0.3, 0.3, rep(0.1, 2 * n_ratings - 1)))))
 
-    m <-    fit$par[1]
+    m2 <-    fit$par[1]
     alp2 <- fit$par[2]
     bet <-  fit$par[3]
     logL <- -fit$value
@@ -34,7 +34,7 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
     sd2 <-  sqrt((alp2^2 * gamma(3 / bet)) / gamma(1 / bet))
     kurt <- (gamma(5 / bet) * gamma(1 / bet)) / gamma(3 / bet)^2 - 3
 
-    est <- data.frame(mu = m, alpha2 = alp2, beta = bet, LogLike = logL,
+    est <- data.frame(mu2 = m2, alpha2 = alp2, beta = bet, LogLike = logL,
                       sigma1 = sd1, sigma2 = sd2, kurtosis = kurt)
     cri <- data.frame(matrix(vector(), 0, 2 * n_ratings - 1))
 
@@ -134,8 +134,8 @@ ggzroc1 <- function(mu2, alpha2, beta) {
 
     ggplot2::ggplot(dat) + ggplot2::theme_classic() +
         ggplot2::geom_line(ggplot2::aes(x = qnorm(V1), y = qnorm(V2))) +
-        ggplot2::scale_x_continuous(limits = c(-3, 3), breaks = seq(-3, 3, by = 1)) +
-        ggplot2::scale_y_continuous(limits = c(-3, 3), breaks = seq(-3, 3, by = 1)) +
+        ggplot2::scale_x_continuous(limits = c(-2.5, 2.5), breaks = seq(-2, 2, by = 1)) +
+        ggplot2::scale_y_continuous(limits = c(-2.5, 2.5), breaks = seq(-2, 2, by = 1)) +
         ggplot2::xlab("z(hit rate)") + ggplot2::ylab("z(false alarm rate)") +
         ggplot2::coord_fixed(ratio = 1)
 
