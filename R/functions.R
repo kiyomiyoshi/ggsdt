@@ -6,8 +6,8 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
     }
 
     n_ratings <- length(nR_S1) / 2
-    ratingFAR <- cumsum(nR_S1) / sum(nR_S1)
-    ratingHR <- cumsum(nR_S2) / sum(nR_S2)
+    ratingFAR <- 1 - cumsum(nR_S1) / sum(nR_S1)
+    ratingHR <-  1 - cumsum(nR_S2) / sum(nR_S2)
 
     # set up initial guess at parameter values
     alp2 <- 1
@@ -39,7 +39,7 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
     cri <- data.frame(matrix(vector(), 0, 2 * n_ratings - 1))
 
     for (i in 1:(2 * n_ratings - 1)) {
-        cri[1, i] <- fit$par[3 + 2 * n_ratings - i]
+        cri[1, i] <- fit$par[3 + i]
     }
 
     est <- cbind(est, cri)
@@ -60,8 +60,8 @@ fit_ggsdt_logL <- function(x, parameters) {
     nR_S2 <- parameters$nR_S2
     n_ratings <- parameters$n_ratings
 
-    far <- gnorm::pgnorm(0 - cri, alpha = 1, beta = bet, mu = 0)
-    hr <- gnorm::pgnorm(d1 - cri, alpha = alp2, beta = bet, mu = 0)
+    far <- gnorm::pgnorm(cri, alpha = 1, beta = bet, mu = 0)
+    hr <- gnorm::pgnorm(cri - d1, alpha = alp2, beta = bet, mu = 0)
 
     s1_exp <- sum(nR_S1) * diff(far)
     s2_exp <- sum(nR_S2) * diff(hr)
