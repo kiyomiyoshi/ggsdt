@@ -37,7 +37,7 @@ The same arguments are also employed in `metaSDT` package:
 <https://github.com/craddm/metaSDT>
 
 `nR_S1` and `nR_S2` are response frequency vectors, ordered from highest
-confidence S2 to highest confidence S1.  
+confidence S1 to highest confidence S2.  
 `add_constant = TRUE` adds a small value to the response frequency
 vectors primarily for avoiding zero-cell-related issues (default value
 is TRUE). See above pages for more information.
@@ -45,8 +45,8 @@ is TRUE). See above pages for more information.
 ``` r
 library(ggsdt)
 
-nR_S1 <- c(40, 45, 25, 50, 120, 170)
-nR_S2 <- c(240, 70, 20, 30, 50, 40)
+nR_S1 <- c(170, 120, 50, 25, 45, 40)
+nR_S2 <- c(40, 50, 30, 20, 70, 240)
 
 f1 <- fit_ggsdt(nR_S1, nR_S2, add_constant = F)
 f1
