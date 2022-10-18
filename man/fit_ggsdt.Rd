@@ -5,8 +5,8 @@
 fit_ggsdt(nR_S1, nR_S2, add_constant = T)
 }
 \arguments{
-  \item{nR_S1}{response frequency for S1 stimuli ordered from highest confidence S2 to highest confidence S1, such as (3, 4, 8, 11, 15, 24)}
-  \item{nR_S2}{response frequency for S2 stimuli ordered from highest confidence S2 to highest confidence S1, such as (20, 15, 10, 7, 5, 3)}
+  \item{nR_S1}{response frequency for S1 stimuli ordered from highest confidence S2 to highest confidence S1, such as (40, 45, 25, 50, 120, 170)}
+  \item{nR_S2}{response frequency for S2 stimuli ordered from highest confidence S2 to highest confidence S1, such as (240, 70, 20, 30, 50, 40)}
   \item{add_constant}{if true, adds small value to response frequency to avoid zero-cell-related issues}
 }
 \description{
