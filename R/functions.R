@@ -91,7 +91,7 @@ ggdistr <- function(mu2, alpha2, beta) {
                               args = list(mu = mu2, alpha = alpha2, beta = beta)) +
         ggplot2::annotate("text", x =  2.6, y = 0.3, parse = F, label = "S2", size = 5) +
         ggplot2::annotate("text", x = -1.5, y = 0.3, parse = F, label = "S1", size = 5) +
-        ggplot2::scale_x_continuous(breaks = seq(0, mu2, mu2),
+        ggplot2::scale_x_continuous(breaks = seq(0, round(mu2, digits = 3), round(mu2, digits = 3)),
                            labels = c(0, mu2), limits = c(-5, 5), expand = c(0, 0)) +
         ggplot2::scale_y_continuous(breaks = NULL,
                            limits = c(0, 0.75), expand = c(0, 0)) +
@@ -115,7 +115,7 @@ ggroc1 <- function(mu2, alpha2, beta) {
         ggplot2::geom_line(ggplot2::aes(x = V1, y = V2)) +
         ggplot2::scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.2)) +
         ggplot2::scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.2)) +
-        ggplot2::xlab("Hit rate") + ggplot2::ylab("FA rate") +
+        ggplot2::xlab("Hit rate") + ggplot2::ylab("False alarm rate") +
         ggplot2::coord_fixed(ratio = 1)
 
 }
@@ -136,7 +136,7 @@ ggzroc1 <- function(mu2, alpha2, beta) {
         ggplot2::geom_line(ggplot2::aes(x = qnorm(V1), y = qnorm(V2))) +
         ggplot2::scale_x_continuous(limits = c(-3, 3), breaks = seq(-3, 3, by = 1)) +
         ggplot2::scale_y_continuous(limits = c(-3, 3), breaks = seq(-3, 3, by = 1)) +
-        ggplot2::xlab("zHit") + ggplot2::ylab("zFA") +
+        ggplot2::xlab("z(hit rate)") + ggplot2::ylab("z(false alarm rate)") +
         ggplot2::coord_fixed(ratio = 1)
 
 }
