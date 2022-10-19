@@ -13,9 +13,7 @@ fit_ggsdt(nR_S1, nR_S2, add_constant = T)
 Estimates GGSDT parameters
 }
 \examples{
-fit_ggsdt(nR_S1 = c(170, 120, 50, 25, 45, 40),
-          nR_S2 = c(40, 50, 30, 20, 70, 240),
-          add_constant = F)
+fit_ggsdt(nR_S1 = c(170, 120, 50, 25, 45, 40), nR_S2 = c(40, 50, 30, 20, 70, 240), add_constant = F)
 }
 \value{
   data.frame with following columns
