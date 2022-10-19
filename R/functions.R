@@ -136,6 +136,7 @@ ggzroc1 <- function(mu2, alpha2, beta) {
     }
 
     dat <- as.data.frame(dat)
+    colnames(dat) <- c("far", "hr")
 
     ggplot2::ggplot(dat) + ggplot2::theme_classic() +
         ggplot2::geom_line(ggplot2::aes(x = stats::qnorm(far), y = stats::qnorm(hr))) +
