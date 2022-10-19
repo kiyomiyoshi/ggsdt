@@ -113,9 +113,10 @@ ggroc1 <- function(mu2, alpha2, beta) {
     }
 
     dat <- as.data.frame(dat)
+    colnames(dat) <- c("far", "hr")
 
     ggplot2::ggplot(dat) + ggplot2::theme_classic() +
-        ggplot2::geom_line(ggplot2::aes(x = V1, y = V2)) +
+        ggplot2::geom_line(ggplot2::aes(x = far, y = hr)) +
         ggplot2::scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.2)) +
         ggplot2::scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.2)) +
         ggplot2::xlab("Hit rate") + ggplot2::ylab("False alarm rate") +
@@ -137,7 +138,7 @@ ggzroc1 <- function(mu2, alpha2, beta) {
     dat <- as.data.frame(dat)
 
     ggplot2::ggplot(dat) + ggplot2::theme_classic() +
-        ggplot2::geom_line(ggplot2::aes(x = stats::qnorm(V1), y = stats::qnorm(V2))) +
+        ggplot2::geom_line(ggplot2::aes(x = stats::qnorm(far), y = stats::qnorm(hr))) +
         ggplot2::scale_x_continuous(limits = c(-2.5, 2.5), breaks = seq(-2, 2, by = 1)) +
         ggplot2::scale_y_continuous(limits = c(-2.5, 2.5), breaks = seq(-2, 2, by = 1)) +
         ggplot2::xlab("z(hit rate)") + ggplot2::ylab("z(false alarm rate)") +
