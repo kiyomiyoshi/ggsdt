@@ -22,7 +22,7 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
     # model fitting
     params <- list("n_ratings" = n_ratings, "nR_S1" = nR_S1, "nR_S2" = nR_S2)
 
-    fit <- suppressWarnings(optim(par = guess, fit_ggsdt_logL, gr = NULL, method = "BFGS", parameters = params,
+    fit <- suppressWarnings(stats::optim(par = guess, fit_ggsdt_logL, gr = NULL, method = "BFGS", parameters = params,
                                   lower = c(0, 0, 0, rep(-Inf, 2 * n_ratings - 1)),
                                   control = list("maxit" = 100000,
                                                  "parscale" = c(1, 0.3, 0.3, rep(0.1, 2 * n_ratings - 1)))))
@@ -137,7 +137,7 @@ ggzroc1 <- function(mu2, alpha2, beta) {
     dat <- as.data.frame(dat)
 
     ggplot2::ggplot(dat) + ggplot2::theme_classic() +
-        ggplot2::geom_line(ggplot2::aes(x = qnorm(V1), y = qnorm(V2))) +
+        ggplot2::geom_line(ggplot2::aes(x = stats::qnorm(V1), y = stats::qnorm(V2))) +
         ggplot2::scale_x_continuous(limits = c(-2.5, 2.5), breaks = seq(-2, 2, by = 1)) +
         ggplot2::scale_y_continuous(limits = c(-2.5, 2.5), breaks = seq(-2, 2, by = 1)) +
         ggplot2::xlab("z(hit rate)") + ggplot2::ylab("z(false alarm rate)") +
