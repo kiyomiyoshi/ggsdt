@@ -1,3 +1,4 @@
+#' @export
 fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
 
     if (add_constant) {
@@ -82,6 +83,7 @@ fit_ggsdt_logL <- function(x, parameters) {
 }
 
 
+#' @export
 ggdistr <- function(mu2, alpha2, beta) {
 
     ggplot2::ggplot() + ggplot2::theme_classic() +
@@ -100,6 +102,7 @@ ggdistr <- function(mu2, alpha2, beta) {
 }
 
 
+#' @export
 ggroc1 <- function(mu2, alpha2, beta) {
 
     dat <- c()
@@ -121,6 +124,7 @@ ggroc1 <- function(mu2, alpha2, beta) {
 }
 
 
+#' @export
 ggzroc1 <- function(mu2, alpha2, beta) {
 
     dat <- c()
