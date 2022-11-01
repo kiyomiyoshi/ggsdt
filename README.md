@@ -9,7 +9,8 @@
 <!-- badges: end -->
 
 The `ggsdt` package implements generalized gaussian signal detection
-theory analysis.
+theory analysis
+(<https://www.biorxiv.org/content/10.1101/2022.10.28.514329v1>).
 
 ## Installation
 
