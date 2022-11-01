@@ -39,8 +39,9 @@ The `fit_ggsdt()` function requires arguments as specified in Maniscalco
 The same arguments are also employed in `metaSDT` package:
 <https://github.com/craddm/metaSDT>
 
-`nR_S1` and `nR_S2` are response frequency vectors, ordered from highest
-confidence S1 to highest confidence S2.  
+`nR_S1` and `nR_S2` are response frequency vectors for S1 and S2
+stimuli, ordered from highest confidence S1 to highest confidence S2
+responses.  
 `add_constant = TRUE` adds a small value to the response frequency
 vectors primarily for avoiding zero-cell-related issues (default value
 is TRUE). See above pages for more information.
@@ -51,7 +52,7 @@ library(ggsdt)
 nR_S1 <- c(170, 120, 50, 25, 45, 40)
 nR_S2 <- c(40, 50, 30, 20, 70, 240)
 
-f1 <- fit_ggsdt(nR_S1, nR_S2, add_constant = F)
+f1 <- fit_ggsdt(nR_S1, nR_S2, add_constant = FALSE)
 f1
 #>        mu2   alpha2     beta   LogLike    sigma1    sigma2  kurtosis         X1
 #> 1 1.090098 1.306408 1.782542 -1338.253 0.7556205 0.9871485 0.2562262 -0.2240238
