@@ -9,7 +9,8 @@
 <!-- badges: end -->
 
 The `ggsdt` package implements generalized gaussian signal detection
-theory analysis (<https://doi.org/10.1101/2022.10.28.514329>).
+theory analysis, which gives metacognitive performance evaluation for
+asymmetric ROC data (<https://doi.org/10.1101/2022.10.28.514329>).
 
 ## Installation
 

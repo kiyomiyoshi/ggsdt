@@ -19,7 +19,8 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/kiyomiyoshi/ggsdt/workflows/R-CMD-check/badge.svg)](https://github.com/kiyomiyoshi/ggsdt/actions)
 <!-- badges: end -->
 
-The `ggsdt` package implements generalized gaussian signal detection theory analysis (https://doi.org/10.1101/2022.10.28.514329).
+The `ggsdt` package implements generalized gaussian signal detection theory analysis, 
+which gives metacognitive performance evaluation for asymmetric ROC data (https://doi.org/10.1101/2022.10.28.514329).
 
 ## Installation
 
