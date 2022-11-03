@@ -70,7 +70,7 @@ fit_ggsdt_logL <- function(x, parameters) {
     s1_exp_number <- c(sum(nR_S1) * far[1], s1_exp, sum(nR_S1) - sum(nR_S1) * far[1] - sum(s1_exp))
     s2_exp_number <- c(sum(nR_S2) * hr[1], s2_exp, sum(nR_S2) - sum(nR_S2) * hr[1] - sum(s2_exp))
 
-    logL <- sum(nR_S2 * log(s2_exp_number/sum(nR_S2)) + nR_S1 * log(s1_exp_number/sum(nR_S1)))
+    logL <- sum(nR_S2 * log(s2_exp_number / sum(nR_S2)) + nR_S1 * log(s1_exp_number / sum(nR_S1)))
 
     if (is.nan(logL)) {
         logL <- -Inf
