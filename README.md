@@ -36,7 +36,7 @@ e.g. `help(fit_ggsdt)`
 
 The `fit_ggsdt()` function requires arguments as specified in Maniscalco
 & Law’s webpage: <http://www.columbia.edu/~bsm2105/type2sdt/>  
-The same arguments are also employed in `metaSDT` package:
+The same arguments are employed in `metaSDT` package:
 <https://github.com/craddm/metaSDT>
 
 `nR_S1` and `nR_S2` are response frequency vectors for S1 and S2
@@ -61,19 +61,19 @@ f1
 ```
 
 ``` r
-ggdistr(f1[1, 1], f1[1, 2], f1[1, 3])
+ggdistr(mu2 = f1[1, 1], alpha2 = f1[1, 2], beta = f1[1, 3])
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="50%" />
 
 ``` r
-ggroc1(f1[1, 1], f1[1, 2], f1[1, 3])
+ggroc1(mu2 = f1[1, 1], alpha2 = f1[1, 2], beta = f1[1, 3])
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-2.png" width="50%" />
 
 ``` r
-ggzroc1(f1[1, 1], f1[1, 2], f1[1, 3])
+ggzroc1(mu2 = f1[1, 1], alpha2 = f1[1, 2], beta = f1[1, 3])
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-3.png" width="50%" />

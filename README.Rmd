@@ -42,7 +42,7 @@ Consult each function's document for more information: e.g. `help(fit_ggsdt)`
 ## Example
 
 The `fit_ggsdt()` function requires arguments as specified in Maniscalco & Law’s webpage: <http://www.columbia.edu/~bsm2105/type2sdt/>  
-The same arguments are also employed in `metaSDT` package: <https://github.com/craddm/metaSDT>
+The same arguments are employed in `metaSDT` package: <https://github.com/craddm/metaSDT>
 
 `nR_S1` and `nR_S2` are response frequency vectors for S1 and S2 stimuli, ordered from highest confidence S1 to highest confidence S2 responses.  
 `add_constant = TRUE` adds a small value to the response frequency vectors primarily for avoiding zero-cell-related issues (default value is TRUE). See above pages for more information.
