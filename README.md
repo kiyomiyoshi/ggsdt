@@ -54,9 +54,9 @@ nR_S2 <- c(40, 50, 30, 20, 70, 240)
 
 f1 <- fit_ggsdt(nR_S1, nR_S2, add_constant = FALSE)
 f1
-#>        mu2   alpha2     beta   LogLike    sigma1    sigma2  kurtosis         X1
+#>        mu2   alpha2     beta   loglike    sigma1    sigma2  kurtosis         c1
 #> 1 1.090098 1.306408 1.782542 -1338.253 0.7556205 0.9871485 0.2562262 -0.2240238
-#>          X2        X3        X4       X5
+#>          c2        c3        c4       c5
 #> 1 0.2713651 0.5001792 0.6354313 1.011963
 ```
 

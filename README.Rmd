@@ -58,7 +58,7 @@ f1
 ```
 
 ```{r fig.height = 2.5, fig.width = 2.5, dpi = 500, message = F, warning = F}
-ggdistr(f1[1, 1], f1[1, 2], f1[1, 3])
-ggroc1(f1[1, 1], f1[1, 2], f1[1, 3])
-ggzroc1(f1[1, 1], f1[1, 2], f1[1, 3])
+ggdistr(mu2 = f1[1, 1], alpha2 = f1[1, 2], beta = f1[1, 3])
+ggroc1(mu2 = f1[1, 1], alpha2 = f1[1, 2], beta = f1[1, 3])
+ggzroc1(mu2 = f1[1, 1], alpha2 = f1[1, 2], beta = f1[1, 3])
 ```

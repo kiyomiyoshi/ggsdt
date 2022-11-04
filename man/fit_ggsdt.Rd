@@ -22,9 +22,9 @@ fit_ggsdt(nR_S1 = c(170, 120, 50, 25, 45, 40),
   \item{mu2}{estimated mean value for S2 distribution}
   \item{alpha2}{estimated alpha value for S2 distribution}
   \item{beta}{estimated beta value shared with S1 and S2 distributions}
-  \item{LogLike}{log likelihood}
+  \item{loglike}{log likelihood}
   \item{sigma1}{SD for S1 distribution calculated with estimated beta value (alpha1 is fixed at 1)}
   \item{sigma2}{SD for S2 distribution calculated with estimated alpha2 and beta values}
   \item{kurtosis}{kurtosis for S1 and S2 distributions caluculated with estimated beta value}
-  \item{Xi}{ith decision criterion (from lowest to highest)}
+  \item{ci}{ith decision criterion (from lowest to highest)}
 }
