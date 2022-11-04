@@ -36,15 +36,14 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
     sd2 <-  sqrt((alp2^2 * gamma(3 / bet)) / gamma(1 / bet))
     kurt <- (gamma(5 / bet) * gamma(1 / bet)) / gamma(3 / bet)^2 - 3
 
-    est <- data.frame(mu2 = m2, alpha2 = alp2, beta = bet, LogLike = logL,
+    est <- data.frame(mu2 = m2, alpha2 = alp2, beta = bet, loglike = logL,
                       sigma1 = sd1, sigma2 = sd2, kurtosis = kurt)
-    cri <- data.frame(matrix(vector(), 0, 2 * n_ratings - 1))
 
     for (i in 1:(2 * n_ratings - 1)) {
-        cri[1, i] <- fit$par[3 + i]
+        new <- fit$par[3 + i]
+        est[ , ncol(est) + 1] <- new
+        colnames(est)[ncol(est)] <- paste0("c", i)
     }
-
-    est <- cbind(est, cri)
 
     return(est)
 
