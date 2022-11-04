@@ -2,12 +2,12 @@
 \alias{fit_ggsdt}
 \title{Fitting GGSDT model}
 \usage{
-fit_ggsdt(nR_S1, nR_S2, add_constant = T)
+fit_ggsdt(nR_S1, nR_S2, add_constant = TRUE)
 }
 \arguments{
   \item{nR_S1}{response frequency for S1 stimuli ordered from highest confidence S1 to highest confidence S2, such as (170, 120, 50, 25, 45, 40)}
   \item{nR_S2}{response frequency for S2 stimuli ordered from highest confidence S1 to highest confidence S2, such as (40, 50, 30, 20, 70, 240)}
-  \item{add_constant}{if true, adds small value to response frequency to avoid zero-cell-related issues (default value is TRUE)}
+  \item{add_constant}{if true, adds a small value to response frequency to avoid zero-cell-related issues (default value is TRUE)}
 }
 \description{
 Estimates GGSDT parameters
