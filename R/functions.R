@@ -12,12 +12,13 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
 
     # set up initial guess at parameter values
     alp2 <- 1
-    bet <- 2
-    d1 <- gnorm::qgnorm(ratingHR[n_ratings], alpha = alp2, beta = bet) -
-        gnorm::qgnorm(ratingFAR[n_ratings], alpha = alp2, beta = bet)
-    c1 <- -1 * gnorm::qgnorm(ratingFAR, alpha = alp2, beta = bet)
-    cri <- c1[1:(2 * n_ratings - 1)]
-    guess <- c(d1, alp2, bet, cri) # can be modified for better model convergence
+    bet <-  2
+    m2 <-   gnorm::qgnorm(ratingHR[n_ratings], alpha = alp2, beta = bet) -
+            gnorm::qgnorm(ratingFAR[n_ratings], alpha = alp2, beta = bet)
+    cri <-  -1 * gnorm::qgnorm(ratingFAR, alpha = alp2, beta = bet)
+    cri <-  cri[1:(2 * n_ratings - 1)]
+
+    guess <- c(m2, alp2, bet, cri) # can be modified for better model convergence
 
     # model fitting
     params <- list("n_ratings" = n_ratings, "nR_S1" = nR_S1, "nR_S2" = nR_S2)
@@ -52,17 +53,17 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
 
 fit_ggsdt_logL <- function(x, parameters) {
 
-    d1 <- x[1]
+    m2 <-   x[1]
     alp2 <- x[2]
-    bet <- x[3]
-    cri <- x[4:(2 * parameters$n_ratings + 2)]
+    bet <-  x[3]
+    cri <-  x[4:(2 * parameters$n_ratings + 2)]
 
     nR_S1 <- parameters$nR_S1
     nR_S2 <- parameters$nR_S2
     n_ratings <- parameters$n_ratings
 
     far <- gnorm::pgnorm(cri, alpha = 1, beta = bet, mu = 0)
-    hr <- gnorm::pgnorm(cri - d1, alpha = alp2, beta = bet, mu = 0)
+    hr <- gnorm::pgnorm(cri - m2, alpha = alp2, beta = bet, mu = 0)
 
     s1_exp <- sum(nR_S1) * diff(far)
     s2_exp <- sum(nR_S2) * diff(hr)
