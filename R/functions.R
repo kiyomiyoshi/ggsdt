@@ -7,15 +7,15 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
     }
 
     n_ratings <- length(nR_S1) / 2
-    ratingFAR <- 1 - cumsum(nR_S1) / sum(nR_S1)
-    ratingHR <-  1 - cumsum(nR_S2) / sum(nR_S2)
+    far <- 1 - cumsum(nR_S1) / sum(nR_S1)
+    hr <-  1 - cumsum(nR_S2) / sum(nR_S2)
 
-    # set up initial guess at parameter values
+    # set up initial guess for parameter values
     alp2 <- 1
     bet <-  2
-    m2 <-   gnorm::qgnorm(ratingHR[n_ratings], alpha = alp2, beta = bet) -
-            gnorm::qgnorm(ratingFAR[n_ratings], alpha = alp2, beta = bet)
-    cri <-  -1 * gnorm::qgnorm(ratingFAR, alpha = alp2, beta = bet)
+    m2 <-   gnorm::qgnorm(hr[n_ratings], alpha = alp2, beta = bet) -
+            gnorm::qgnorm(far[n_ratings], alpha = alp2, beta = bet)
+    cri <-  -1 * gnorm::qgnorm(far, alpha = alp2, beta = bet)
     cri <-  cri[1:(2 * n_ratings - 1)]
 
     guess <- c(m2, alp2, bet, cri) # can be modified for better model convergence
@@ -23,25 +23,25 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
     # model fitting
     params <- list("n_ratings" = n_ratings, "nR_S1" = nR_S1, "nR_S2" = nR_S2)
 
-    fit <- suppressWarnings(stats::optim(par = guess, fit_ggsdt_logL, gr = NULL, method = "BFGS", parameters = params,
+    fit <- suppressWarnings(stats::optim(par = guess, fit_ggsdt_ll, gr = NULL, method = "BFGS", parameters = params,
                                   lower = c(0, 0, 0, rep(-Inf, 2 * n_ratings - 1)),
                                   control = list("maxit" = 100000,
                                                  "parscale" = c(1, 0.3, 0.3, rep(0.1, 2 * n_ratings - 1)))))
 
-    m2 <-    fit$par[1]
+    m2 <-   fit$par[1]
     alp2 <- fit$par[2]
     bet <-  fit$par[3]
-    logL <- -fit$value
+    ll <-   -fit$value
     sd1 <-  sqrt((1^2 * gamma(3 / bet)) / gamma(1 / bet))
     sd2 <-  sqrt((alp2^2 * gamma(3 / bet)) / gamma(1 / bet))
     kurt <- (gamma(5 / bet) * gamma(1 / bet)) / gamma(3 / bet)^2 - 3
 
-    est <- data.frame(mu2 = m2, alpha2 = alp2, beta = bet, loglike = logL,
+    est <- data.frame(mu2 = m2, alpha2 = alp2, beta = bet, loglike = ll,
                       sigma1 = sd1, sigma2 = sd2, kurtosis = kurt)
 
     for (i in 1:(2 * n_ratings - 1)) {
         new <- fit$par[3 + i]
-        est[ , ncol(est) + 1] <- new
+        est[, ncol(est) + 1] <- new
         colnames(est)[ncol(est)] <- paste0("c", i)
     }
 
@@ -50,7 +50,7 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
 }
 
 
-fit_ggsdt_logL <- function(x, parameters) {
+fit_ggsdt_ll <- function(x, parameters) {
 
     m2 <-   x[1]
     alp2 <- x[2]
@@ -59,26 +59,25 @@ fit_ggsdt_logL <- function(x, parameters) {
 
     nR_S1 <- parameters$nR_S1
     nR_S2 <- parameters$nR_S2
-    n_ratings <- parameters$n_ratings
 
-    far <- gnorm::pgnorm(cri, alpha = 1, beta = bet, mu = 0)
-    hr <- gnorm::pgnorm(cri - m2, alpha = alp2, beta = bet, mu = 0)
+    exp_far <- gnorm::pgnorm(cri, alpha = 1, beta = bet, mu = 0)
+    exp_hr <- gnorm::pgnorm(cri - m2, alpha = alp2, beta = bet, mu = 0)
 
-    s1_exp <- sum(nR_S1) * diff(far)
-    s2_exp <- sum(nR_S2) * diff(hr)
+    exp_s1 <- sum(nR_S1) * diff(exp_far)
+    exp_s2 <- sum(nR_S2) * diff(exp_hr)
 
-    s1_exp_number <- c(sum(nR_S1) * far[1], s1_exp, sum(nR_S1) - sum(nR_S1) * far[1] - sum(s1_exp))
-    s2_exp_number <- c(sum(nR_S2) * hr[1], s2_exp, sum(nR_S2) - sum(nR_S2) * hr[1] - sum(s2_exp))
+    n_exp_s1 <- c(sum(nR_S1) * exp_far[1], exp_s1, sum(nR_S1) - sum(nR_S1) * exp_far[1] - sum(exp_s1))
+    n_exp_s2 <- c(sum(nR_S2) * exp_hr[1],  exp_s2, sum(nR_S2) - sum(nR_S2) * exp_hr[1]  - sum(exp_s2))
 
-    logL <- sum(nR_S2 * log(s2_exp_number / sum(nR_S2)) + nR_S1 * log(s1_exp_number / sum(nR_S1)))
+    ll <- sum(nR_S2 * log(n_exp_s2 / sum(nR_S2)) + nR_S1 * log(n_exp_s1 / sum(nR_S1)))
 
-    if (is.nan(logL)) {
-        logL <- -Inf
+    if (is.nan(ll)) {
+        ll <- -Inf
     }
 
-    logL <- -logL
+    ll <- -ll
 
-    return(logL)
+    return(ll)
 
 }
 
@@ -91,8 +90,8 @@ ggdistr <- function(mu2, alpha2, beta) {
                               args = list(mu = 0, alpha = 1, beta = beta)) +
         ggplot2::geom_function(fun = gnorm::dgnorm, size = 0.8,
                               args = list(mu = mu2, alpha = alpha2, beta = beta)) +
-        ggplot2::annotate("text", x =  2.6, y = 0.3, parse = F, label = "S2", size = 5) +
-        ggplot2::annotate("text", x = -1.5, y = 0.3, parse = F, label = "S1", size = 5) +
+        ggplot2::annotate("text", x =  2.6, y = 0.3, parse = FALSE, label = "S2", size = 5) +
+        ggplot2::annotate("text", x = -1.5, y = 0.3, parse = FALSE, label = "S1", size = 5) +
         ggplot2::scale_x_continuous(breaks = seq(0, mu2, mu2),
                            labels = c(0, round(mu2, digits = 3)), limits = c(-5, 5), expand = c(0, 0)) +
         ggplot2::scale_y_continuous(breaks = NULL,
