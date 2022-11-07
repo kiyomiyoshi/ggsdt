@@ -66,10 +66,10 @@ fit_ggsdt_ll <- function(x, parameters) {
     exp_s1 <- sum(nR_S1) * diff(exp_far)
     exp_s2 <- sum(nR_S2) * diff(exp_hr)
 
-    n_exp_s1 <- c(sum(nR_S1) * exp_far[1], exp_s1, sum(nR_S1) - sum(nR_S1) * exp_far[1] - sum(exp_s1))
-    n_exp_s2 <- c(sum(nR_S2) * exp_hr[1],  exp_s2, sum(nR_S2) - sum(nR_S2) * exp_hr[1]  - sum(exp_s2))
+    exp_fas <-  c(sum(nR_S1) * exp_far[1], exp_s1, sum(nR_S1) - sum(nR_S1) * exp_far[1] - sum(exp_s1))
+    exp_hits <- c(sum(nR_S2) * exp_hr[1],  exp_s2, sum(nR_S2) - sum(nR_S2) * exp_hr[1]  - sum(exp_s2))
 
-    ll <- sum(nR_S2 * log(n_exp_s2 / sum(nR_S2)) + nR_S1 * log(n_exp_s1 / sum(nR_S1)))
+    ll <- sum(nR_S2 * log(exp_hits / sum(nR_S2)) + nR_S1 * log(exp_fas / sum(nR_S1)))
 
     if (is.nan(ll)) {
         ll <- -Inf
