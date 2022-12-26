@@ -18,7 +18,7 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
     cri <-  -1 * gnorm::qgnorm(far, alpha = alp2, beta = bet)
     cri <-  cri[1:(2 * n_ratings - 1)]
 
-    guess <- c(m2, alp2, bet, cri) # can be modified for model convergence
+    guess <- c(m2, alp2, bet, cri) # can be modified for better convergence
 
     # model fitting
     params <- list("n_ratings" = n_ratings, "nR_S1" = nR_S1, "nR_S2" = nR_S2)
