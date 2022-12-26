@@ -29,8 +29,8 @@ devtools::install_github("kiyomiyoshi/ggsdt")
 `ggroc1()`: plots type1 ROC  
 `ggzroc1()`: plots z-transformed type1 ROC
 
-Consult each function’s document for more information:
-e.g. `help(fit_ggsdt)`
+Consult each function’s document for more information: e.g.,
+`help(fit_ggsdt)`
 
 ## Example
 
