@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/kiyomiyoshi/ggsdt/workflows/R-CMD-check/badge.svg)](https://github.com/kiyomiyoshi/ggsdt/actions)
+[![R-CMD-check](https://github.com/kiyomiyoshi/ggsdt/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kiyomiyoshi/ggsdt/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The `ggsdt` package implements generalized gaussian signal detection
