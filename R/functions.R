@@ -23,7 +23,7 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
     # model fitting
     params <- list("n_ratings" = n_ratings, "nR_S1" = nR_S1, "nR_S2" = nR_S2)
 
-    fit <- suppressWarnings(stats::optim(par = guess, fit_ggsdt_ll, gr = NULL, method = "BFGS", parameters = params,
+    fit <- suppressWarnings(stats::optim(par = guess, fn = fit_ggsdt_ll, gr = NULL, method = "BFGS", parameters = params,
                                   lower = c(0, 0, 0, rep(-Inf, 2 * n_ratings - 1)),
                                   control = list("maxit" = 100000,
                                                  "parscale" = c(1, 0.3, 0.3, rep(0.1, 2 * n_ratings - 1)))))
