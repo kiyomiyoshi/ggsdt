@@ -10,7 +10,7 @@ fit_ggsdt <- function(nR_S1, nR_S2, add_constant = TRUE) {
     far <- 1 - cumsum(nR_S1) / sum(nR_S1)
     hr <-  1 - cumsum(nR_S2) / sum(nR_S2)
 
-    # set up initial guess for parameter values
+    # initial guess for parameter values
     alp2 <- 1
     bet <-  2
     m2 <-   gnorm::qgnorm(hr[n_ratings], alpha = alp2, beta = bet) -
